@@ -63,3 +63,12 @@ var canShowNotifications = false;
 	Notification.requestPermission(function(permission){
 	canShowNotifications = (permission === 'granted');
 });
+
+function emojiReplace(txtM){
+	if(txtM.value.indexOf(':') >= 0)
+		txtM.value = txtM.value.replace(':)', '::blush::')
+			.replace(':(', '::disappointed::')
+			.replace(':P', '::stuck_out_tongue_winking_eye::')
+			.replace(':D', '::smile::')
+			.replace(':*', '::kissing_heart::');
+}
