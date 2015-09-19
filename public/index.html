@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+  <head>
+    <title>silly-chat</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      form { background: #000; padding: 3px; position: fixed; bottom: 0; width: 100%; }
+      form input { border: 0; padding: 10px; width: 90%; margin-right: .5%; }
+      form button { width: 9%; background: rgb(130, 224, 255); border: none; padding: 10px; }
+      #messages { list-style-type: none; padding: 0; width: 100%; float: right; margin-bottom: 40px; position:absolute; bottom: 0px; }
+      #name{ position: absolute;left: 50%;top: 50%; margin-left: -170px; margin-top: -50px; }
+      #name input { padding: 5px }
+      #name button { padding: 5px }
+    </style>
+    <link rel="stylesheet" type="text/css" href="css/main.css"></link>
+    <link rel="icon" type="image/png" href="images/silly_chat_16.png">
+  </head>
+  <body>
+    <ul id="messages"></ul>
+    
+    <form id="sendM" action="" onsubmit="return sendMessage()" style="display: none">
+      <input id="m" autocomplete="off" /><button>Send</button>
+    </form>
+    
+    <div id="name">
+      Name: <input id="txtName" /><button onclick="setName();">OK</button>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var ulMessages = document.getElementById('messages');
+      
+      var userName;
+      if(!userName){
+        showUnScreen();
+      }
+      else{
+        showMessagingScreen();
+      }
+      
+      function setName(){
+        userName = document.getElementById('txtName').value;
+        showMessagingScreen();
+      }
+      
+      function showUnScreen(){
+        document.getElementById('name').style.display = 'block';
+        document.getElementById('messages').style.display = 'none';
+        document.getElementById('sendM').style.display = 'none';
+      }
+      
+      function showMessagingScreen(){
+        document.getElementById('name').style.display = 'none';
+        document.getElementById('messages').style.display = 'block';
+        document.getElementById('sendM').style.display = 'block';
+      }
+    </script>
+    <script src="scripts/app.js"></script>
+  </body>
+</html>

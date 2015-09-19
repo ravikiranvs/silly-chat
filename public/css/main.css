@@ -1,0 +1,47 @@
+.bubble{
+	border-radius: 5px;
+	box-shadow: 0 0 6px #B2B2B2;
+	display: inline-block;
+	padding: 10px 18px;
+	position: relative;
+	vertical-align: top;
+	width: 80%;
+}
+
+.bubble::before {
+	content: "\00a0";
+	display: block;
+	height: 16px;
+	position: absolute;
+	top: 11px;
+	transform:             rotate( 29deg ) skew( -35deg );
+		-moz-transform:    rotate( 29deg ) skew( -35deg );
+		-ms-transform:     rotate( 29deg ) skew( -35deg );
+		-o-transform:      rotate( 29deg ) skew( -35deg );
+		-webkit-transform: rotate( 29deg ) skew( -35deg );
+	width:  20px;
+}
+
+.you {
+	float: left;   
+	margin: 5px 45px 5px 20px;
+	background-color: #F0D0F0;
+}
+
+.you::before {
+	
+	left: -9px;
+	background-color: #F0D0F0;
+}
+
+.me {
+	background-color: #A0F0F0;
+	float: right;    
+	margin: 5px 20px 5px 45px;         
+}
+
+.me::before {
+	
+	background-color: #A0F0F0;
+	right: -9px;    
+}
