@@ -5,13 +5,25 @@ var io = require('socket.io')(http);
 
 app.use(express.static('public'));
 
+var users = {};
+
 io.on('connection', function(socket){
-  console.log('a user connected');
+  users[socket.id] = 'Unknown';
+  
+  io.emit('users', users);
+  
   socket.on('disconnect', function(){
-    console.log('user disconnected');
+    users[socket.id] = undefined;
+    io.emit('users', users);
   });
+  
   socket.on('chat message', function(msg){
     io.emit('chat message', msg);
+  });
+  
+  socket.on('users', function(name){
+    users[socket.id] = name;
+    io.emit('users', users);
   });
 });
 

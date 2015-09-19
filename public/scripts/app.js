@@ -1,5 +1,3 @@
-var socket = io();
-
 function sendMessage(e){
 	var txtMessage = document.getElementById('m');
 	var msg = {user: userName, message: txtMessage.value};
@@ -72,3 +70,19 @@ function emojiReplace(txtM){
 			.replace(':D', '::smile::')
 			.replace(':*', '::kissing_heart::');
 }
+
+socket.on('users', function(users){
+	var ul = document.getElementById("users");
+	
+	while( ul.firstChild ){
+		ul.removeChild( ul.firstChild );
+	}
+	
+	for (var id in users) {
+		if (users.hasOwnProperty(id)) {
+			var li = document.createElement("li");
+			li.appendChild(document.createTextNode(users[id] || id));
+			ul.appendChild(li);
+		}
+	}
+});
