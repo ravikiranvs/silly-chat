@@ -18,7 +18,7 @@ socket.on('chat message', function(msg){
 		li.setAttribute("class", "bubble you");
 	ul.appendChild(li);
 	
-	if(document.hidden){
+	if(document.hidden || isPageNotInFocus){
 		document.title = "You have unread messages";
 		var notification = new Notification(msg.user,{
 			body: msg.message,
@@ -86,3 +86,11 @@ socket.on('users', function(users){
 		}
 	}
 });
+
+var isPageNotInFocus = false;
+window.onfocus = function(){
+	isPageNotInFocus = false;
+}
+window.onblur = function(){
+	isPageNotInFocus = true;
+}
