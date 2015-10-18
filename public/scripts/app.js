@@ -1,6 +1,11 @@
 function sendMessage(e){
 	var txtMessage = document.getElementById('m');
-	var msg = {user: userName, message: txtMessage.value};
+	var dNow = new Date();
+	var msg = {
+		user: userName, 
+		message: txtMessage.value, 
+		time: dNow.getHours() + ":" + dNow.getMinutes()
+	};
 	socket.emit('chat message', JSON.stringify(msg));
 	txtMessage.value = '';
 	return false;
@@ -11,23 +16,30 @@ socket.on('chat message', function(msg){
 	
 	var ul = document.getElementById("messages");
 	var li = document.createElement("li");
+	var span = document.createElement("span");
 	li.appendChild(document.createTextNode(msg.message));
 	if(msg.user == userName)
 		li.setAttribute("class", "bubble me");
 	else
 		li.setAttribute("class", "bubble you");
+	span.innerText = msg.time;
+	span.setAttribute("class", "time-stamp");
+	li.appendChild(span);
 	ul.appendChild(li);
 	
 	if(document.hidden || isPageNotInFocus){
 		document.title = "You have unread messages";
-		var notification = new Notification(msg.user,{
-			body: msg.message,
-			icon: 'images/silly_chat_128.png'
-		});
-		notification.onclick = function() { window.focus(); };
-		setTimeout(function(){
-		notification.close();
-		},4000);
+		
+		if(config.notification == "true"){
+			var notification = new Notification(msg.user,{
+				body: msg.message,
+				icon: 'images/silly_chat_128.png'
+			});
+			notification.onclick = function() { window.focus(); };
+			setTimeout(function(){
+			notification.close();
+			},4000);
+		}
 	}
 });
 
@@ -63,6 +75,7 @@ var canShowNotifications = false;
 });
 
 function emojiReplace(txtM){
+	msgTyping();
 	if(txtM.value.indexOf(':') >= 0)
 		txtM.value = txtM.value.replace(':)', '::blush::')
 			.replace(':(', '::disappointed::')
@@ -72,17 +85,23 @@ function emojiReplace(txtM){
 }
 
 socket.on('users', function(users){
-	var ul = document.getElementById("users");
-	
-	while( ul.firstChild ){
-		ul.removeChild( ul.firstChild );
+	if(users[socket.id] != config.name){
+		setUserName(config.name);
 	}
-	
-	for (var id in users) {
-		if (users.hasOwnProperty(id)) {
-			var li = document.createElement("li");
-			li.appendChild(document.createTextNode(users[id] || id));
-			ul.appendChild(li);
+	else{
+		var ul = document.getElementById("users");
+		
+		while( ul.firstChild ){
+			ul.removeChild( ul.firstChild );
+		}
+		
+		for (var id in users) {
+			if (users.hasOwnProperty(id)) {
+				var li = document.createElement("li");
+				li.appendChild(document.createTextNode(users[id] || id));
+				li.id = id;
+				ul.appendChild(li);
+			}
 		}
 	}
 });
@@ -94,3 +113,52 @@ window.onfocus = function(){
 window.onblur = function(){
 	isPageNotInFocus = true;
 }
+
+
+function toggleSideMenu(){
+	var sideMenu = DomElements.Settings.div;
+	if(sideMenu.className ==  "showSideNav")
+		sideMenu.className =  "";
+	else{
+		sideMenu.className =  "showSideNav";
+		DomElements.Settings.name.value = config.name;
+		DomElements.Settings.notification.checked = (config.notification == "true");
+	}
+}
+
+function saveSettings(){
+	config.name = DomElements.Settings.name.value;
+	config.notification = "" + DomElements.Settings.notification.checked;
+	
+	setUserName(config.name);
+	
+	toggleSideMenu();
+}
+
+function newSmallWindow()
+{
+	window.open(window.location.href, "_blank", "width=400, height=" + (window.screen.availHeight - 65));
+	
+	// ==UserScript==
+	// @grant       GM_addStyle
+	// ==/UserScript==
+	setTimeout(function(){
+		var ww = window.open('', '_self', ''); 
+		ww.close(); 
+	}, 1000);
+}
+
+function msgTyping(){
+	socket.emit('chat isTyping', socket.id);
+}
+
+socket.on('chat isTyping', function(id){
+	var activeLi = document.getElementById(id);
+	activeLi.className = "typing";
+	setTimeout(function(){
+		var lis = document.getElementById("users").children;
+		for(var i = 0; i < lis.length; i++){
+			lis[i].className = "";
+		}
+	}, 2000)
+});

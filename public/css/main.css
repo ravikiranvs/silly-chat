@@ -1,11 +1,13 @@
+
+
+
 .bubble{
-	border-radius: 5px;
-	box-shadow: 0 0 6px #B2B2B2;
 	display: inline-block;
 	padding: 10px 18px;
 	position: relative;
 	vertical-align: top;
 	width: 80%;
+	color: #ffffff;
 }
 
 .bubble::before {
@@ -13,35 +15,158 @@
 	display: block;
 	height: 16px;
 	position: absolute;
-	top: 11px;
-	transform:             rotate( 29deg ) skew( -35deg );
-		-moz-transform:    rotate( 29deg ) skew( -35deg );
-		-ms-transform:     rotate( 29deg ) skew( -35deg );
-		-o-transform:      rotate( 29deg ) skew( -35deg );
-		-webkit-transform: rotate( 29deg ) skew( -35deg );
-	width:  20px;
+	top: 19px;
+	z-index: -1;
+	width:  22px;
 }
 
 .you {
 	float: left;   
 	margin: 5px 45px 5px 20px;
-	background-color: #F0D0F0;
+	background-color: #b080b0;
 }
 
 .you::before {
 	
-	left: -9px;
-	background-color: #F0D0F0;
+	left: -3px;
+	background-color: inherit;
+	transform:             rotate( 0deg ) skew( -60deg );
+		-moz-transform:    rotate( 0deg ) skew( -60deg );
+		-ms-transform:     rotate( 0deg ) skew( -60deg );
+		-o-transform:      rotate( 0deg ) skew( -60deg );
+		-webkit-transform: rotate( 0deg ) skew( -60deg );
 }
 
 .me {
-	background-color: #A0F0F0;
+	background-color: #70a0a0;
 	float: right;    
 	margin: 5px 20px 5px 45px;         
 }
 
 .me::before {
 	
-	background-color: #A0F0F0;
-	right: -9px;    
+	background-color: inherit;
+	right: -3px;
+	transform:             rotate( 0deg ) skew( 60deg );
+		-moz-transform:    rotate( 0deg ) skew( 60deg );
+		-ms-transform:     rotate( 0deg ) skew( 60deg );
+		-o-transform:      rotate( 0deg ) skew( 60deg );
+		-webkit-transform: rotate( 0deg ) skew( 60deg );
+}
+
+#settings > .header{
+	font-size: 18px;
+	padding: 10px;
+}
+#settingsName
+{
+	border: 0;
+	border-bottom: 1px solid #ffffff;
+	outline: 0;
+	background: transparent;
+	margin-left: 10px;
+	color: #ffffff;
+}
+#settingsNotification{
+	margin-left: 10px;
+}
+
+#settingsSave{
+	border-radius: 50%;
+    border: 0;
+    background-color: #ffffff;
+    padding: 5px;
+    float: right;
+    margin-right: 10px;
+	outline: 0;
+}
+#settingsSave:hover{
+	color: #70a0a0;
+}
+
+
+input[type="checkbox"] {
+    display:none;
+}
+input[type="checkbox"] + label {
+    display:inline-block;
+    width:19px;
+    height:19px;
+    margin:-1px 4px 0 0;
+    vertical-align:middle;
+    background: transparent;
+    cursor:pointer;
+	margin-left: 10px;
+}
+input[type="checkbox"]:checked + label {
+    background:transparent;
+}
+
+
+/* SQUARED THREE */
+.notificationSetting {
+	width: 20px;
+	position: relative;
+}
+
+.notificationSetting label {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 0;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,.4);
+
+	background: -webkit-linear-gradient(top, #222 0%, #45484d 100%);
+	background: -moz-linear-gradient(top, #222 0%, #45484d 100%);
+	background: -o-linear-gradient(top, #222 0%, #45484d 100%);
+	background: -ms-linear-gradient(top, #222 0%, #45484d 100%);
+	background: linear-gradient(top, #222 0%, #45484d 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#222', endColorstr='#45484d',GradientType=0 );
+}
+
+.notificationSetting label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 4px;
+	left: 4px;
+	border: 3px solid #fcfff4;
+	border-top: none;
+	border-right: none;
+
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.notificationSetting label:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+}
+
+.notificationSetting input[type=checkbox]:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+.time-stamp{
+	font-size: 9px;
+    position: absolute;
+    right: 9px;
+    bottom: 1px;
+}
+#users li.typing{
+	color: #D7FF0D;
 }

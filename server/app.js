@@ -21,6 +21,10 @@ io.on('connection', function(socket){
     io.emit('chat message', msg);
   });
   
+  socket.on('chat isTyping', function(typing){
+    io.emit('chat isTyping', typing);
+  });
+  
   socket.on('users', function(name){
     users[socket.id] = name;
     io.emit('users', users);
