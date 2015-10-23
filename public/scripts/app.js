@@ -3,10 +3,11 @@ function sendMessage(e){
 	var dNow = new Date();
 	var msg = {
 		user: userName, 
-		message: txtMessage.value, 
+		message: emojione.toImage(txtMessage.value), 
 		time: dNow.getHours() + ":" + dNow.getMinutes()
 	};
-	socket.emit('chat message', JSON.stringify(msg));
+	if(msg.message != "")
+		socket.emit('chat message', JSON.stringify(msg));
 	txtMessage.value = '';
 	return false;
 };
@@ -17,7 +18,8 @@ socket.on('chat message', function(msg){
 	var ul = document.getElementById("messages");
 	var li = document.createElement("li");
 	var span = document.createElement("span");
-	li.appendChild(document.createTextNode(msg.message));
+	//li.appendChild(document.createTextNode(msg.message));
+	li.innerHTML = msg.message;
 	if(msg.user == userName)
 		li.setAttribute("class", "bubble me");
 	else
@@ -77,11 +79,11 @@ var canShowNotifications = false;
 function emojiReplace(txtM){
 	msgTyping();
 	if(txtM.value.indexOf(':') >= 0)
-		txtM.value = txtM.value.replace(':)', '::blush::')
-			.replace(':(', '::disappointed::')
-			.replace(':P', '::stuck_out_tongue_winking_eye::')
-			.replace(':D', '::smile::')
-			.replace(':*', '::kissing_heart::');
+		txtM.value = txtM.value.replace(':)', ':blush:')
+			.replace(':(', ':disappointed:')
+			.replace(':P', ':stuck_out_tongue_winking_eye:')
+			.replace(':D', ':smile:')
+			.replace(':*', ':kissing_heart:');
 }
 
 socket.on('users', function(users){
