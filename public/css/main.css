@@ -1,5 +1,11 @@
+@font-face {
+    font-family: ROBOT;
+    src: url(../fonts/norwester.ttf);
+}
 
-
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .bubble{
 	display: inline-block;

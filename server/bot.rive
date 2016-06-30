@@ -1,0 +1,40 @@
+// GOOGLE
++ {weight=100}_ [(hello|hey|hi)] [bot] [(can you|can u|could you|could u)] (google|search for) *
+- Google###<star5>
+
+// WEATHER
++ {weight=50}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] [outside] [(right now|now)]
+- WeatherNow###Bangalore
+
++ {weight=100}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] in _ [*] [(right now|now)]
+- WeatherNow###<star4>
+
++ {weight=50}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] [outside] [for] today
+- WeatherNow###Bangalore
+
++ {weight=100}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] in _ [*] [for] today
+- WeatherNow###<star4>
+
+// MOVIES
++ {weight=50}_ [(hello|hey|hi)] [bot] [(show me|what are|find)] [(the|some)] (new|latest) movies
+- Movie###now_playing###0
+
++ {weight=50}_ [(hello|hey|hi)] [bot] [(show me|what are|find)] [(the|some)] (good|top|top rated) movies
+- Movie###good###0
+
++ {weight=50}_ [(hello|hey|hi)] [bot] [(show me|find)] [the] movie *
+- Movie###search###<star4>
+
++ {weight=100}_ [*] link _ [*]
+- <call>link <star2></call>
+
++ _ [(hello|hey|hi)] bot
+- Hello <star>! How may I assist you{weight=5}
+- Hi there <star>,  How may I assist you!
+- Hey <star>,  How may I assist you!{weight=5}
+- Hi <star>,  How may I assist you!{weight=10}
+
+> object link javascript
+	var query = args.join(" ");
+	return "Click <a target=\"_blank\" href=\"" + query + "\">here</a> to open above link in new tab.";
+< object
