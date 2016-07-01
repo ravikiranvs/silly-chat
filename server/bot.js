@@ -32,6 +32,9 @@ function botReply(user, question, cb) {
           case 'WeatherNow':
             weatherData(command[1], 'now', cb);
             break;
+          case 'WeatherToday':
+            weatherData(command[1], 'today', cb);
+            break;
           case 'Movie':
             movieData(command[1], command[2], cb);
             break;
@@ -75,27 +78,63 @@ function googleSearch(query, cb) {
 
 function weatherData(city, timeSpan, cb) {
   cb(styleReply('OK. Getting weather data'));
-  http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=798a73bf6df2e2e5e14e024b37f639a0&units=metric',
-    function (res) {
-      var body = '';
-      res.on('data', function (d) {
-        body += d;
-      });
-      res.on('end', function () {
-        // Data reception is done, do whatever with it!
-        var data = JSON.parse(body);
-        let searchResHTML = 'The weather rigth now:<br /><br />';
+  switch (timeSpan) {
+    case 'now':
+      http.get('http://api.openweathermap.org/data/2.5/weather?q=' + city + '&APPID=798a73bf6df2e2e5e14e024b37f639a0&units=metric',
+        function (res) {
+          var body = '';
+          res.on('data', function (d) {
+            body += d;
+          });
+          res.on('end', function () {
+            // Data reception is done, do whatever with it!
+            var data = JSON.parse(body);
+            let searchResHTML = 'The weather rigth now:<br /><br />';
 
-        const weather = data.weather[0];
+            const weather = data.weather[0];
 
-        searchResHTML += '<img src="http://openweathermap.org/img/w/' + weather.icon + '.png" /><br />'
-        searchResHTML += 'Location: ' + data.name + '<br />';
-        searchResHTML += 'Temperature: ' + data.main.temp + '&deg;C<br />';
-        searchResHTML += 'Cloud Cover: ' + data.clouds.all + '%<br />';
+            searchResHTML += '<img src="http://openweathermap.org/img/w/' + weather.icon + '.png" /><br />'
+            searchResHTML += 'Location: ' + data.name + '<br />';
+            searchResHTML += 'Temperature: ' + data.main.temp + '&deg;C<br />';
+            searchResHTML += 'Cloud Cover: ' + data.clouds.all + '%<br />';
 
-        cb(styleReply(searchResHTML));
-      });
-    });
+            cb(styleReply(searchResHTML));
+          });
+        });
+      break;
+    case 'today':
+      http.get('http://api.openweathermap.org/data/2.5/forecast?q=' + city + '&APPID=798a73bf6df2e2e5e14e024b37f639a0&units=metric',
+        function (res) {
+          var body = '';
+          res.on('data', function (d) {
+            body += d;
+          });
+          res.on('end', function () {
+            // Data reception is done, do whatever with it!
+            var data = JSON.parse(body);
+            let searchResHTML = '<div class="weather-scroller" style="padding: 10px; width: 100%; overflow-y: hidden; overflow-x: scroll; white-space: nowrap; font-family: monospace;">';
+
+            searchResHTML += data.list.map(function (listItem) {
+              var dateTime = new Date(listItem.dt_txt + ' GMT');
+              const weather = listItem.weather[0];
+              weatherRes = '<div style="display: inline-block; vertical-align: middle; margin-right: 25px;">';
+              weatherRes += '<img src="http://openweathermap.org/img/w/' + weather.icon + '.png" /><br />';
+              weatherRes += dateTime.toLocaleTimeString() + '<br />';
+              weatherRes += dateTime.toLocaleDateString() + '<br />';
+              weatherRes += 'Temp: ' + listItem.main.temp + '&deg;C<br />';
+              weatherRes += 'Cloud Cover: ' + listItem.clouds.all + '%<br />';
+              weatherRes += '</div>'
+
+              return weatherRes;
+            }).join('');
+
+            searchResHTML += '</div>';
+            cb(styleReply(searchResHTML));
+          });
+        });
+      break;
+  }
+
 }
 
 

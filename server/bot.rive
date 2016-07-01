@@ -10,10 +10,10 @@
 - WeatherNow###<star4>
 
 + {weight=50}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] [outside] [for] today
-- WeatherNow###Bangalore
+- WeatherToday###Bangalore
 
 + {weight=100}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] in _ [*] [for] today
-- WeatherNow###<star4>
+- WeatherToday###<star4>
 
 // MOVIES
 + {weight=50}_ [(hello|hey|hi)] [bot] [(show me|what are|find)] [(the|some)] (new|latest) movies
