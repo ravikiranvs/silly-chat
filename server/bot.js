@@ -38,6 +38,9 @@ function botReply(user, question, cb) {
           case 'Movie':
             movieData(command[1], command[2], cb);
             break;
+          case 'Task':
+            rtmTask(command[1], cb);
+            break;
           default:
             cb(styleReply(command[0] + command[1]));
             break;
@@ -181,6 +184,32 @@ function getMovieDataHTML(res, cb) {
     searchResHTML += '</tbody></table>';
 
     cb(styleReply(searchResHTML));
+  });
+}
+
+function rtmTask(task, cb) {
+  cb(styleReply('OK. Sending task to Remember The Milk'));
+
+  var nodemailer = require('nodemailer');
+
+  // create reusable transporter object using the default SMTP transport 
+  var transporter = nodemailer.createTransport('smtps://silly.chat.bot%40gmail.com:nothingtosee@smtp.gmail.com');
+
+  // setup e-mail data with unicode symbols 
+  var mailOptions = {
+    from: '"Kiran" <silly.chat.bot@gmail.com>', // sender address 
+    to: 'ravikiranvs+6829a0@rmilk.com', // list of receivers 
+    subject: task, // Subject line 
+    text: task, // plaintext body 
+    html: '<b>' + task + '</b>' // html body 
+  };
+
+  // send mail with defined transport object 
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      cb(styleReply(':( I Goofed up: ' + error));
+    }
+    cb(styleReply('Task added: see <a target="_blank" href="https://www.rememberthemilk.com/home/ravikiranvs/">Inbox</a>'));
   });
 }
 

@@ -25,6 +25,9 @@
 + {weight=50}_ [(hello|hey|hi)] [bot] [(show me|find)] [the] movie *
 - Movie###search###<star4>
 
++ {weight=50}_ [(hello|hey|hi)] [bot] (remind me [to]|[add] task|) *
+- Task###<star4>
+
 + {weight=100}_ [*] link _ [*]
 - <call>link <star2></call>
 
