@@ -1,0 +1,94 @@
+.messages {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  float: right;
+  margin-bottom: 40px;
+  position:absolute;
+  bottom: 10px;
+}
+      
+.new-message-form {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.new-message-form textarea {
+  float: left;
+  height: 45px;
+  width: 90%;
+  border: 0;
+  border-top: 1px solid #26C2F0;
+  outline: 0;
+  font-size: large;
+  resize: none;
+}
+
+.new-message-form button { 
+  width: 10%;
+  background: #26C2F0;
+  color: #ffffff;
+  border: none;
+  padding: 16px;
+}
+
+.time-stamp{
+	font-size: 9px;
+    position: absolute;
+    right: 9px;
+    bottom: 1px;
+}
+
+.bubble{
+	display: inline-block;
+	padding: 10px 18px;
+	position: relative;
+	vertical-align: top;
+	width: 80%;
+	color: #ffffff;
+}
+
+.bubble::before {
+	content: "\00a0";
+	display: block;
+	height: 16px;
+	position: absolute;
+	top: 19px;
+	z-index: -1;
+	width:  22px;
+}
+
+.you {
+	float: left;   
+	margin: 5px 45px 5px 20px;
+	background-color: #b080b0;
+}
+
+.you::before {
+	
+	left: -3px;
+	background-color: inherit;
+	transform:             rotate( 0deg ) skew( -60deg );
+		-moz-transform:    rotate( 0deg ) skew( -60deg );
+		-ms-transform:     rotate( 0deg ) skew( -60deg );
+		-o-transform:      rotate( 0deg ) skew( -60deg );
+		-webkit-transform: rotate( 0deg ) skew( -60deg );
+}
+
+.me {
+	background-color: #70a0a0;
+	float: right;    
+	margin: 5px 20px 5px 45px;         
+}
+
+.me::before {
+	
+	background-color: inherit;
+	right: -3px;
+	transform:             rotate( 0deg ) skew( 60deg );
+		-moz-transform:    rotate( 0deg ) skew( 60deg );
+		-ms-transform:     rotate( 0deg ) skew( 60deg );
+		-o-transform:      rotate( 0deg ) skew( 60deg );
+		-webkit-transform: rotate( 0deg ) skew( 60deg );
+}

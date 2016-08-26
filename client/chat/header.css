@@ -1,0 +1,25 @@
+.main-header{
+  background: #26C2F0;
+  color: white;
+  position: fixed; 
+  top: 0; 
+  width: 100%; 
+  z-index: 100;
+  padding: 10px;
+  font-size: 18px;
+}
+
+.users-list {
+  display: inline-block;
+  list-style-type: none;
+}
+
+.users-list li {
+  display: inline;
+  list-style-type: none;
+  padding: 20px;
+}
+
+.users-list li.typing{
+	color: #D7FF0D;
+}

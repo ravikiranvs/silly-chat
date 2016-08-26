@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <title>silly-chat</title>
+    <link rel="stylesheet" type="text/css" href="assets/bundle.css"></link>
+    <link rel="icon" type="image/png" href="images/silly_chat_16.png">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/emojione/1.5.0/assets/css/emojione.min.css" />
+  </head>
+  <body>
+    <div id="settings">
+      <div class="header">
+        <a id="settings-close" class="fa fa-times"></a>
+      </div>
+      <div style="padding: 10px">
+        Name<input id="settingsName"></input>
+      </div>
+      <div style="padding: 10px; display: inline-flex;">
+        Notification
+        <div class="notificationSetting">
+          <input type="checkbox" value="None" id="settingsNotification" name="check" />
+          <label for="settingsNotification"></label>
+        </div>
+      </div>
+      <div style="padding: 10px">
+        <button id="settingsSave">OK</button>
+      </div>
+    </div>
+    
+    <div id="header">
+      <a id="side-menu-button" class="fa fa-cog"></a>
+      <ul id="users"></ul>
+    </div>
+    
+    <ul id="messages"></ul>
+    
+    <div id="emojiPredict"></div>
+    
+    <form id="sendM" action="" style="display: none">
+      <input id="m" autocomplete="off" /><button class="fa fa-paper-plane"></button>
+    </form>
+    
+    <div id="name">
+      <input id="txtName" placeholder="Name" />
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript">
+      var socket = io();
+    </script>
+    <script src="assets/bundle.js"></script>
+    <script src="//cdn.jsdelivr.net/emojione/1.5.0/lib/js/emojione.min.js"></script>
+  </body>
+</html>

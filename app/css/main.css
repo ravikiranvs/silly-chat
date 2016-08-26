@@ -1,7 +1,73 @@
-@font-face {
-    font-family: ROBOT;
-    src: url(../fonts/norwester.ttf);
-}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+      body { font: 13px Helvetica, Arial; }
+      
+      #name{ display: none; position: absolute;left: 50%;top: 50%; margin-left: -170px; margin-top: -50px; }
+      #name input { 
+        padding: 5px;
+        border: 0;
+        border-bottom: 1px solid;
+        outline: 0;
+      }
+      
+      #header{
+        display: none;
+        background: #26C2F0;
+        color: white;
+        position: fixed; 
+        top: 0; 
+        width: 100%; 
+        z-index: 100;
+        padding: 10px;
+        font-size: 18px;
+      }
+      #users {
+        display: inline-block;
+        list-style-type: none;
+      }
+      #users li { display: inline; list-style-type: none; padding: 20px; }
+      
+      #messages { list-style-type: none; padding: 0; width: 100%; float: right; margin-bottom: 40px; position:absolute; bottom: 10px; }
+      
+      form { position: fixed; bottom: 0; width: 100%; }
+      form input {
+        padding: 10px;
+        width: 90%;
+        border: 0;
+        border-top: 1px solid #26C2F0;
+        outline: 0;
+        font-size: large;
+       }
+      form button { 
+        width: 10%;
+        background: #26C2F0;
+        color: #ffffff;
+        border: none;
+        padding: 16px;
+       }
+       
+       #settings{
+         color: #ffffff;
+         position: absolute;
+         height: 100%;
+         width: 300px;
+         z-index: 1000;
+         background-color: #36D2F0;
+         left: -300px;
+         
+          -webkit-transition: left, 0.1s linear;
+          -moz-transition: left, 0.1s linear;
+          -ms-transition: left, 0.1s linear;
+          -o-transition: left, 0.1s linear;
+          transition: left, 0.1s linear;
+       }
+       .showSideNav{
+        left: 0px !important;
+        -webkit-transition: left, 0.1s linear;
+        -moz-transition: left, 0.1s linear;
+        -ms-transition: left, 0.1s linear;
+        -o-transition: left, 0.1s linear;
+        transition: left, 0.1s linear;
+       }
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -188,4 +254,9 @@ input[type="checkbox"]:checked + label {
 }
 #users li.typing{
 	color: #D7FF0D;
+}
+
+@font-face {
+    font-family: ROBOT;
+    src: url(../fonts/norwester.ttf);
 }
