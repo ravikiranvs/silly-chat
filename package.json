@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/index.js",
   "scripts": {
-    "start": "npm-run-all build:prod serve",
+    "start": "node server",
     "serve": "node server",
     "build:prod": "SET NODE_ENV=production&& webpack -p",
     "build:dev": "SET NODE_ENV=development&& webpack --watch",
