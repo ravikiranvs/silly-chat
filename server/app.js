@@ -1,6 +1,6 @@
 import express from 'express';
 import http from 'http';
-import socket from 'socket.io';
+const socket = require('socket.io');
 import SillyChatBot from './bot';
 import gzipStatic from 'connect-gzip-static';
 
