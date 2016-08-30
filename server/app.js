@@ -4,10 +4,14 @@ import socket from 'socket.io';
 import SillyChatBot from './bot';
 import gzipStatic from 'connect-gzip-static';
 
+console.log('starting app - 2');
+
 const app = express();
 const httpServer = http.Server(app);
 const io = socket(httpServer);
 const chatBot = new SillyChatBot();
+
+console.log('starting app - 3');
 
 app.use(gzipStatic('public'));
 //app.use(express.static('public'));
@@ -54,5 +58,5 @@ var port = process.env.PORT || 5000;
 
 httpServer.listen(port, function () {
   // eslint-disable-next-line no-console
-  console.log('listening on *:5000');
+  console.log(`listening on *:${port}`);
 });
