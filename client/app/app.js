@@ -23,7 +23,7 @@ class App extends React.Component {
   }
 
   onLogin() {
-    this.state = { name: this.config.getName() };
+    this.setState({ name: this.config.getName() });
   }
 
   render() {
