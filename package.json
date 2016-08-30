@@ -8,6 +8,7 @@
     "serve": "node server",
     "build:prod": "SET NODE_ENV=production&& webpack -p",
     "build:dev": "SET NODE_ENV=development&& webpack --watch",
+    "build:server": "SET NODE_ENV=server&& webpack",
     "lint": "eslint server/**/*.js app/**/*.js",
     "debug": "npm-run-all --parallel build:dev serve"
   },
@@ -23,6 +24,7 @@
     "babel-register": "^6.9.0",
     "connect-gzip-static": "^1.0.0",
     "express": "^4.13.3",
+    "fs": "0.0.1-security",
     "nodemailer": "^2.4.2",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
