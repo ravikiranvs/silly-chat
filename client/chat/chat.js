@@ -17,6 +17,12 @@ class Chat extends React.Component {
     this.onNewMessageKeyUp = this.onNewMessageKeyUp.bind(this);
 
     context.socket.on('chat message', this.newMessage.bind(this));
+
+    context.windowVisibilityBroadcaster.subscribe(this.onWindowVisible.bind(this));
+  }
+
+  onWindowVisible(){
+    document.title = 'silly-chat';
   }
 
   onNewMessageChange(event) {
@@ -27,9 +33,10 @@ class Chat extends React.Component {
   newMessage(messageJson) {
     const message = JSON.parse(messageJson);
     this.setState({ messages: [...this.state.messages, message] });
-
-    if(this.context.config.getDisplayNotification() && this.context.socket.id != message.userId){
+    
+    if(this.context.config.getDisplayNotification() && this.context.socket.id != message.userId && this.context.windowVisibilityBroadcaster.isHidden()){
       Toast.show(message.username, message.message);
+      document.title = 'new message';
     }
   }
 
@@ -91,7 +98,8 @@ class Chat extends React.Component {
 
 Chat.contextTypes = {
   socket: PropTypes.object,
-  config: PropTypes.object
+  config: PropTypes.object,
+  windowVisibilityBroadcaster: PropTypes.object
 };
 
 export default Chat;
