@@ -6,9 +6,8 @@
   "scripts": {
     "start": "node dist/app.js",
     "serve": "node server",
-    "build:prod": "SET NODE_ENV=production&& webpack -p",
+    "build:prod": "SET NODE_ENV=production&& webpack -p && babel server -d dist",
     "build:dev": "SET NODE_ENV=development&& webpack --watch",
-    "build:server": "SET NODE_ENV=server&& babel server -d dist",
     "lint": "eslint server/**/*.js app/**/*.js",
     "debug": "npm-run-all --parallel build:dev serve"
   },
