@@ -3,6 +3,7 @@ import Header from './header';
 import React, {PropTypes} from 'react';
 import Settings from './settings';
 import messageFormatter from '../message-formatter';
+import Toast from '../toaster/index';
 
 class Chat extends React.Component {
   constructor(props, context) {
@@ -26,12 +27,17 @@ class Chat extends React.Component {
   newMessage(messageJson) {
     const message = JSON.parse(messageJson);
     this.setState({ messages: [...this.state.messages, message] });
+
+    if(this.context.config.getDisplayNotification()){
+      Toast.show(message.username, message.message);
+    }
   }
 
   sendMessage() {
     const dNow = new Date();
     const message = {
-      user: this.context.socket.id,
+      userId: this.context.socket.id,
+      username: this.context.config.getName(),
       message: this.state.newMessage,
       time: `${dNow.getHours()}: ${dNow.getMinutes()}`
     };
@@ -48,9 +54,11 @@ class Chat extends React.Component {
     this.setState({ settingsVisible: false });
   }
 
-  onNewMessageKeyUp(event){
-    if(event.keyCode == 13 && (!(event.ctrlKey || event.shiftKey))){
+  onNewMessageKeyUp(event) {
+    if (event.keyCode == 13 && (!(event.ctrlKey || event.shiftKey))) {
       this.sendMessage();
+    } else {
+      this.context.socket.emit('chat isTyping', this.context.socket.id);
     }
   }
 
@@ -62,10 +70,10 @@ class Chat extends React.Component {
 
         <ul className="messages">
           {this.state.messages.map((message, index) => {
-            const messageClass = message.user == this.context.socket.id ? 'bubble me' : 'bubble you';
+            const messageClass = message.userId == this.context.socket.id ? 'bubble me' : 'bubble you';
             return (
               <li key={index} className={messageClass}>
-                <div dangerouslySetInnerHTML={{__html: `${messageFormatter(message.message)}`}}></div>
+                <div dangerouslySetInnerHTML={{ __html: `${messageFormatter(message.message)}` }}></div>
                 <span className="time-stamp">{message.time}</span>
               </li>
             );
@@ -81,6 +89,9 @@ class Chat extends React.Component {
   }
 }
 
-Chat.contextTypes = { socket: PropTypes.object };
+Chat.contextTypes = {
+  socket: PropTypes.object,
+  config: PropTypes.object
+};
 
 export default Chat;

@@ -4,14 +4,10 @@ import socket from 'socket.io';
 import SillyChatBot from './bot';
 import gzipStatic from 'connect-gzip-static';
 
-console.log('starting app - 2');
-
 const app = express();
 const httpServer = http.Server(app);
 const io = socket(httpServer);
 const chatBot = new SillyChatBot();
-
-console.log('starting app - 3');
 
 app.use(gzipStatic('public'));
 //app.use(express.static('public'));
@@ -32,9 +28,9 @@ io.on('connection', function (socket) {
   socket.on('chat message', function (msg) {
     io.emit('chat message', msg);
     var chatMsg = JSON.parse(msg);
-    chatBot.botReply(users[chatMsg.user], chatMsg.message, function (reply) {
+    chatBot.botReply(users[chatMsg.userId], chatMsg.message, function (reply) {
       var botMsg = {
-        user: 'Bot',
+        username: 'Bot',
         message: reply,
         time: chatMsg.time
       };

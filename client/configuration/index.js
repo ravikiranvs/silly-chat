@@ -6,6 +6,12 @@ class Configuration {
     this._socket = socket;
   }
 
+  resetState(){
+    const configStrs = (document.cookie && document.cookie.indexOf('SillyChatConfig=') >= 0) ? document.cookie.split('SillyChatConfig=')[1].split('###') : ['', 'true'];
+    this._name = configStrs[0];
+    this._displayNotification = configStrs[1] == 'true';
+  }
+
   static getInstance(socket) {
     if (this._instance)
       return this._instance;
@@ -14,10 +20,12 @@ class Configuration {
   }
 
   getName() {
+    this.resetState();
     return this._name;
   }
 
   getDisplayNotification() {
+    this.resetState();
     return this._displayNotification;
   }
 

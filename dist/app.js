@@ -22,14 +22,10 @@ var _connectGzipStatic2 = _interopRequireDefault(_connectGzipStatic);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-console.log('starting app - 2');
-
 var app = (0, _express2.default)();
 var httpServer = _http2.default.Server(app);
 var io = (0, _socket2.default)(httpServer);
 var chatBot = new _bot2.default();
-
-console.log('starting app - 3');
 
 app.use((0, _connectGzipStatic2.default)('public'));
 //app.use(express.static('public'));
@@ -50,9 +46,9 @@ io.on('connection', function (socket) {
   socket.on('chat message', function (msg) {
     io.emit('chat message', msg);
     var chatMsg = JSON.parse(msg);
-    chatBot.botReply(users[chatMsg.user], chatMsg.message, function (reply) {
+    chatBot.botReply(users[chatMsg.userId], chatMsg.message, function (reply) {
       var botMsg = {
-        user: 'Bot',
+        username: 'Bot',
         message: reply,
         time: chatMsg.time
       };
