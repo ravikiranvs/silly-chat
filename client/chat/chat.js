@@ -28,7 +28,7 @@ class Chat extends React.Component {
     const message = JSON.parse(messageJson);
     this.setState({ messages: [...this.state.messages, message] });
 
-    if(this.context.config.getDisplayNotification()){
+    if(this.context.config.getDisplayNotification() && this.context.socket.id != message.userId){
       Toast.show(message.username, message.message);
     }
   }
