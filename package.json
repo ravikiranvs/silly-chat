@@ -10,7 +10,8 @@
     "build:dev": "SET NODE_ENV=development&& webpack --watch",
     "lint": "eslint server/**/*.js app/**/*.js",
     "debug": "npm-run-all --parallel build:dev serve",
-    "test": "ava -w -v",
+    "test": "ava",
+    "test:watch": "ava -w -v",
     "coverage": "nyc ava"
   },
   "keywords": [
