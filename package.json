@@ -11,6 +11,7 @@
     "lint": "eslint server/**/*.js app/**/*.js",
     "debug": "npm-run-all --parallel build:dev serve",
     "test": "nyc ava --timeout=10s",
+    "test:v": "ava -v --timeout=10s",
     "test:watch": "ava -w -v --timeout=10s"
   },
   "keywords": [
@@ -44,19 +45,34 @@
     "compression-webpack-plugin": "^0.3.1",
     "coveralls": "^2.11.15",
     "css-loader": "^0.23.1",
+    "enzyme": "^2.6.0",
     "eslint": "^3.0.1",
     "eslint-plugin-react": "^5.2.2",
     "eslint-watch": "^2.1.13",
     "extract-text-webpack-plugin": "^1.0.1",
     "file-loader": "^0.9.0",
+    "ignore-styles": "^5.0.1",
     "jquery": "^3.1.1",
     "jsdom": "^9.8.3",
     "nock": "^9.0.2",
     "npm-run-all": "^2.3.0",
     "nyc": "^10.0.0",
     "proxyquire": "^1.7.10",
+    "react-addons-test-utils": "^15.4.1",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
     "webpack-livereload-plugin": "^0.8.2"
+  },
+  "ava": {
+    "require": [
+      "babel-register",
+      "ignore-styles"
+    ],
+    "babel": {
+      "presets": [
+        "es2015",
+        "react"
+      ]
+    }
   }
 }
