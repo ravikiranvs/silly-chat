@@ -3,3 +3,8 @@ node_js:
  - "6"
 after_success:
  - "./node_modules/.bin/nyc report --reporter=text-lcov | ./node_modules/.bin/coveralls"
+ deploy:
+  provider: heroku
+  api_key:
+    secure: "a1c83c86-4718-444c-94fb-e43ac602390e"
+  app: "silly-chat"
