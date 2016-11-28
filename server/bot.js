@@ -78,6 +78,7 @@ class SillyChatBot {
     }
     catch (err) {
       styledCallback('Sorry! I may have goofed up.<br /><br />Error: ' + err);
+      console.log(err.stack);
     }
   }
 }

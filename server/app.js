@@ -56,3 +56,9 @@ httpServer.listen(port, function () {
   // eslint-disable-next-line no-console
   console.log(`listening on *:${port}`);
 });
+
+export default {
+  closeServer: function () {
+    httpServer.close();
+  }
+};

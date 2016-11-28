@@ -8,6 +8,7 @@ var CLIENT_DIR = path.resolve(__dirname, '../client');
 
 // webpack options
 module.exports = {
+  devtool: "inline-source-map",
   entry: {
     // bundle: APP_DIR + '/index.js',
     app: CLIENT_DIR + '/index.js'
