@@ -10,9 +10,9 @@
     "build:dev": "SET NODE_ENV=development&& webpack --watch",
     "lint": "eslint server/**/*.js app/**/*.js",
     "debug": "npm-run-all --parallel build:dev serve",
-    "test": "nyc ava --timeout=10s",
-    "test:v": "ava -v --timeout=10s",
-    "test:watch": "ava -w -v --timeout=10s"
+    "test": "nyc ava --timeout=60s",
+    "test:v": "ava -v --timeout=60s",
+    "test:watch": "ava -w -v --timeout=60s"
   },
   "keywords": [
     "node",
