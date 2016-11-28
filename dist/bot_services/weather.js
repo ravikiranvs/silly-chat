@@ -84,10 +84,9 @@ var WeatherService = function () {
   }, {
     key: 'serve',
     value: function serve(callback, question, _ref) {
-      var _ref2 = _slicedToArray(_ref, 2);
-
-      var type = _ref2[0];
-      var city = _ref2[1];
+      var _ref2 = _slicedToArray(_ref, 2),
+          type = _ref2[0],
+          city = _ref2[1];
 
       if (type === 'current') {
         this.currentWeather(city, callback);

@@ -52,9 +52,8 @@ var TodoService = function () {
   }, {
     key: 'serve',
     value: function serve(callback, question, _ref) {
-      var _ref2 = _slicedToArray(_ref, 1);
-
-      var task = _ref2[0];
+      var _ref2 = _slicedToArray(_ref, 1),
+          task = _ref2[0];
 
       this.addTask(task, callback);
     }

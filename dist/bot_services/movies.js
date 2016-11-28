@@ -78,10 +78,9 @@ var MoviesService = function () {
   }, {
     key: 'serve',
     value: function serve(callback, question, _ref) {
-      var _ref2 = _slicedToArray(_ref, 2);
-
-      var type = _ref2[0];
-      var searchTerm = _ref2[1];
+      var _ref2 = _slicedToArray(_ref, 2),
+          type = _ref2[0],
+          searchTerm = _ref2[1];
 
       if (type === 'now_playing') {
         this.nowPlaying(callback);

@@ -45,9 +45,8 @@ var GoogleService = function () {
   }, {
     key: 'serve',
     value: function serve(callback, question, _ref) {
-      var _ref2 = _slicedToArray(_ref, 1);
-
-      var query = _ref2[0];
+      var _ref2 = _slicedToArray(_ref, 1),
+          query = _ref2[0];
 
       this.search(query, callback);
     }
