@@ -4,29 +4,53 @@ import { shallow } from 'enzyme';
 
 import Login from './login';
 
-const context = {
-    config: {
-        getName: function () {
-            return 'Username1'
+test('has a div with class name login and an empty inputbox.', t => {
+    const context = {
+        config: {
+            getName: function() {
+                return null;
+            }
         }
     }
-};
-
-test('has a div with class name login', t => {
     const wrapper = shallow(<Login />, { context });
     t.true(wrapper.hasClass('login'));
+    t.true(wrapper.find('input').props().value == '');
 });
 
-// test('renders two `.Bar`', t => {
-//     const wrapper = shallow(<Foo/>);
-//     t.is(wrapper.find('.bar').length, 2);
-// });
+test('textbox can take a username.', t => {
+    let name = null;
+    const context = {
+        config: {
+            getName: function() {
+                return name;
+            },
+            setName: function(userName) {
+                name = userName;
+            }
+        }
+    }
+    const wrapper = shallow(<Login />, { context });
+    wrapper.find('input').simulate('change', { target: { value: 'UserName1' } });
+    t.true(wrapper.find('input').props().value == 'UserName1')
+});
 
-// test('renders children when passed in', t => {
-//     const wrapper = shallow(
-//         <Foo>
-//             <div className="unique"/>
-//         </Foo>
-//     );
-//     t.true(wrapper.contains(<div className="unique"/>));
-// });
+test.cb('on enter key press the setName function gets called and then the login prop function.', t => {
+    let name = null;
+    const context = {
+        config: {
+            getName: function() {
+                return 'UserName1';
+            },
+            setName: function(userName) {
+                t.true(userName == 'UserName1');
+            }
+        }
+    }
+
+    const loginFunction = function(){
+        t.end();
+    }
+
+    const wrapper = shallow(<Login login={loginFunction} />, { context });
+    wrapper.find('input').simulate('keyup', { keyCode: 13 });
+});
