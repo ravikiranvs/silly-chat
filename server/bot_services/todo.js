@@ -27,8 +27,9 @@ class TodoService {
     transporter.sendMail(mailOptions, (error, info) => {
       if (error) {
         callback(`:( I Goofed up: ${error} ${info}`);
+      } else {
+        callback(`Task added: see <a target="_blank" href="${this.rtmInboxUrl}">Inbox</a>`);
       }
-      callback(`Task added: see <a target="_blank" href="${this.rtmInboxUrl}">Inbox</a>`);
     });
   }
 
