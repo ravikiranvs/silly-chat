@@ -47,7 +47,7 @@ test.cb('Can send and receive messages.', t => {
                 client1.disconnect();
                 client2.disconnect();
                 t.end();
-            }, 100);
+            }, 500);
         });
     });
 });
