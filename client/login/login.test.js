@@ -36,20 +36,27 @@ test('textbox can take a username.', t => {
 
 test.cb('on enter key press the setName function gets called and then the login prop function.', t => {
     let name = null;
+    let loginCalled = false, setNameCalled = false;
     const context = {
         config: {
             getName: function() {
                 return 'UserName1';
             },
             setName: function(userName) {
+                setNameCalled = true;
                 t.true(userName == 'UserName1');
             }
         }
     }
 
-    const loginFunction = function(){
-        t.end();
+    const loginFunction = function() {
+        loginCalled = true;
     }
+
+    setTimeout(function() {
+        t.true(loginCalled && setNameCalled);
+        t.end();
+    }, 100)
 
     const wrapper = shallow(<Login login={loginFunction} />, { context });
     wrapper.find('input').simulate('keyup', { keyCode: 13 });
