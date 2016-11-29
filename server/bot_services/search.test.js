@@ -1,11 +1,5 @@
 import test from 'ava';
-
-import jQuery from 'jquery';
-import jsDom from 'jsdom';
-
-var localDocument = jsDom.jsdom('<html></html>');
-var localWindow = localDocument.defaultView;
-var $ = jQuery(localWindow);
+import helper from './service-test-helper';
 
 var mockResults = JSON.stringify({
     items: [
@@ -42,7 +36,7 @@ test.cb('Bot can search.', t => {
             callbackCount++;
         }
         else if (callbackCount == 1) {
-            var respJq = $($.parseHTML(resp));
+            var respJq = helper.createJqueryObjFromHtmlSnippet(resp);
             t.true(respJq.find('li').length == 2);
             t.end();
         }

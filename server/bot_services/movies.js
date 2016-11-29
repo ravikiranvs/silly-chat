@@ -45,7 +45,7 @@ class MoviesService {
   }
 
   search(searchTerm, callback) {
-    callback(`OK. Searching for:${searchTerm}`);
+    callback(`OK. Searching for: ${searchTerm}`);
     https.get(`https://api.themoviedb.org/3/search/movie?query=${searchTerm}&api_key=${this.apiKey}`, (res) => {
       this.createHtmlFromResponse(res, callback);
     });
