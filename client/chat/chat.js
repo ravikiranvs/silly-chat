@@ -77,7 +77,7 @@ class Chat extends React.Component {
 
         <ul className="messages">
           {this.state.messages.map((message, index) => {
-            const messageClass = message.userId == this.context.socket.id ? 'bubble me' : 'bubble you';
+            const messageClass = message.username == this.context.config.getName() ? 'bubble me' : 'bubble you';
             return (
               <li key={index} className={messageClass}>
                 <div dangerouslySetInnerHTML={{ __html: `${messageFormatter(message.message)}` }}></div>
