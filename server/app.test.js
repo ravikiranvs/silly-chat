@@ -61,7 +61,7 @@ test.cb('Bot is running.', t => {
             var msg = JSON.parse(strMsg);
             if (msg.username == 'Bot') {
                 var msgFromBot = $($.parseHTML(msg.message));
-                if (msgFromBot.text().indexOf('How may I assist you!') > -1) {
+                if (msgFromBot.text().indexOf('How may I assist you') > -1) {
                     client1.disconnect();
                     t.end();
                 }
