@@ -26,6 +26,10 @@ var _todo = require('./bot_services/todo');
 
 var _todo2 = _interopRequireDefault(_todo);
 
+var _link = require('./bot_middleware/link');
+
+var _link2 = _interopRequireDefault(_link);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -63,6 +67,8 @@ var SillyChatBot = function () {
             name: 'todo',
             provider: new _todo2.default()
         }];
+
+        this.botMiddleWares = [new _link2.default()];
     }
 
     // Apply Bot Style for Html
@@ -82,6 +88,10 @@ var SillyChatBot = function () {
             var styledCallback = function styledCallback(reply) {
                 return cb(_this.styleReply(reply));
             };
+
+            this.botMiddleWares.map(function (middleware) {
+                middleware.serve(styledCallback, question);
+            });
 
             try {
                 var reply = this.bot.reply(user, user.replace(' ', '_') + ' ' + question);
