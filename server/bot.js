@@ -3,6 +3,7 @@ import SearchService from './bot_services/search';
 import WeatherService from './bot_services/weather';
 import MoviesService from './bot_services/movies';
 import TodoService from './bot_services/todo';
+import LinkMiddleware from './bot_middleware/link';
 
 class SillyChatBot {
     // Initializes the bot from rive script
@@ -43,6 +44,8 @@ class SillyChatBot {
                 provider: new TodoService()
             }
         ];
+
+        this.botMiddleWares = [new LinkMiddleware()];
     }
 
     // Apply Bot Style for Html
@@ -53,6 +56,10 @@ class SillyChatBot {
     botReply(user, question, cb) {
         // Use bot style for all replies 
         const styledCallback = (reply) => cb(this.styleReply(reply));
+
+        this.botMiddleWares.map((middleware) => {
+            middleware.serve(styledCallback, question);
+        });
 
         try {
             const reply = this.bot.reply(user, user.replace(' ', '_') + ' ' + question);
