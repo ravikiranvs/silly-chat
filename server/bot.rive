@@ -4,7 +4,10 @@
 - Hey <star>,  How may I assist you!{weight=5}
 - Hi <star>,  How may I assist you!{weight=10}
 
-+ _ (bad|stupid|idiot|useless) _ bot _
++ _ [*] (bad|stupid|idiot) [*] bot [*]
+- I'm Sorry :(
+
++ _ [*] bot [*] (bad|stupid|idiot) [*]
 - I'm Sorry :(
 
 // GOOGLE
