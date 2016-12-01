@@ -4,6 +4,9 @@
 - Hey <star>,  How may I assist you!{weight=5}
 - Hi <star>,  How may I assist you!{weight=10}
 
++ _ (bad|stupid|idiot|useless) _ bot _
+- I'm Sorry :(
+
 // GOOGLE
 + {weight=100}_ [(hello|hey|hi)] [bot] [(can you|can u|could you|could u)] (google|search for) *
 - search###<star5>
@@ -33,6 +36,3 @@
 
 + {weight=50}_ [(hello|hey|hi)] [bot] (remind me [to]|[add] task) *
 - todo###<star4>
-
-+ {weight=100}_ [*] link _ [*]
-- link
