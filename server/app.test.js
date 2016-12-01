@@ -3,7 +3,7 @@ import jQuery from 'jquery';
 import jsDom from 'jsdom';
 
 require('babel-register')({
-  presets: [ 'es2015' ]
+    presets: ['es2015']
 });
 
 var server = require('./app').default;
@@ -12,10 +12,10 @@ var io = require('socket.io-client');
 
 var socketURL = 'http://localhost:5000';
 
-var options = {
-    transports: ['websocket'],
-    'force new connection': true
-};
+// var options = {
+//     transports: ['websocket'],
+//     'force new connection': true
+// };
 
 var localDocument = jsDom.jsdom('<html></html>');
 var localWindow = localDocument.defaultView;
@@ -23,7 +23,7 @@ var $ = jQuery(localWindow);
 
 test.cb('Can establist a web socket connection.', t => {
     var client1 = io.connect(socketURL);
-    client1.on('connect', function (data) {
+    client1.on('connect', function () {
         client1.disconnect();
         t.end();
     });
@@ -31,9 +31,9 @@ test.cb('Can establist a web socket connection.', t => {
 
 test.cb('Can send and receive messages.', t => {
     var client1 = io.connect(socketURL);
-    client1.on('connect', function (data) {
+    client1.on('connect', function () {
         var client2 = io.connect(socketURL);
-        client2.on('connect', function (data) {
+        client2.on('connect', function () {
             var isMessageReceived = false;
             client2.on('chat message', function (strMsg) {
                 var msg = JSON.parse(strMsg);
@@ -55,8 +55,7 @@ test.cb('Can send and receive messages.', t => {
 
 test.cb('Bot is running.', t => {
     var client1 = io.connect(socketURL);
-    client1.on('connect', function (data) {
-        var botGreetingReceived = false;
+    client1.on('connect', function () {
         client1.on('chat message', function (strMsg) {
             var msg = JSON.parse(strMsg);
             if (msg.username == 'Bot') {
@@ -71,6 +70,6 @@ test.cb('Bot is running.', t => {
     });
 });
 
-test.after('cleanup', t => {
+test.after('cleanup', () => {
     server.closeServer();
 });

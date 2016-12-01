@@ -19,15 +19,15 @@ var Chat = proxyquire('./chat', {
 var contextBase = {
     socket: {
         id: '1234',
-        on: function(cb) { },
-        emit: function(type, id) { }
+        on: function() { },
+        emit: function() { }
     },
     windowVisibilityBroadcaster: {
-        subscribe: function(cb) { },
+        subscribe: function() { },
         isHidden: () => false
     },
     config: {
-        getName: function() { return 'user1' },
+        getName: function() { return 'user1'; },
         getDisplayNotification: () => false
     }
 };
@@ -149,7 +149,7 @@ test.serial.cb('page title changes and notification is shown if browser is inact
             }));
         }, 30);
     };
-    const wrapper = shallow(<Chat />, { context });
+    shallow(<Chat />, { context });
     setTimeout(function() {
         t.true(global.document.title == 'new message');
         t.true(tostShowWasCalled);
@@ -180,7 +180,7 @@ test.serial.cb('page title doesn\'t change and notification is not shown if brow
             }));
         }, 30);
     };
-    const wrapper = shallow(<Chat />, { context });
+    shallow(<Chat />, { context });
     setTimeout(function() {
         t.false(global.document.title == 'new message');
         t.false(tostShowWasCalled);

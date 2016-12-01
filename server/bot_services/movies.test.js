@@ -20,7 +20,7 @@ var mockResults = JSON.stringify({
 
 var nock = require('nock');
 
-var example = nock('https://api.themoviedb.org')
+nock('https://api.themoviedb.org')
     .get('/3/movie/now_playing?api_key=715cc933f7a7c58610d3ae41cac87ae2')
     .reply(200, mockResults)
     .get('/3/movie/top_rated?api_key=715cc933f7a7c58610d3ae41cac87ae2')

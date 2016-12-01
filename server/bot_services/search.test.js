@@ -16,7 +16,7 @@ var mockResults = JSON.stringify({
 
 var nock = require('nock');
 
-var example = nock('https://www.googleapis.com')
+nock('https://www.googleapis.com')
     .get('/customsearch/v1?cx=005026335174976688145%3A_mkgntfmfgg&key=AIzaSyC8mDlqfkNKmX9go6_5WgRpRQ2bifiTqOM&q=something')
     .reply(200, mockResults);
 

@@ -1,5 +1,4 @@
 import test from 'ava';
-import helper from './service-test-helper';
 
 var mockSingleResult = JSON.stringify({
     weather: [
@@ -37,7 +36,7 @@ var mockForcastResult = JSON.stringify({
 
 var nock = require('nock');
 
-var example = nock('http://api.openweathermap.org')
+nock('http://api.openweathermap.org')
     .get('/data/2.5/weather?q=location&APPID=798a73bf6df2e2e5e14e024b37f639a0&units=metric')
     .reply(200, mockSingleResult)
     .get('/data/2.5/forecast?q=location&APPID=798a73bf6df2e2e5e14e024b37f639a0&units=metric')
@@ -75,7 +74,6 @@ test.cb('Bot can get forcasted weather.', t => {
             callbackCount++;
         }
         else if (callbackCount == 1) {
-            var respJq = helper.createJqueryObjFromHtmlSnippet(resp);
             t.true(resp.indexOf('<div class="weather-scroller"') > -1);
             t.end();
         }

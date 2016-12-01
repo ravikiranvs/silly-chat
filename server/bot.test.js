@@ -9,8 +9,8 @@ var SillyChatBot = require('./bot').default;
 test.cb('Can handle errors.', t => {
     var bot = new SillyChatBot();
     bot.bot = {
-        reply: function () { throw new Error('Unexpected error.') }
-    }
+        reply: function () { throw new Error('Unexpected error.'); }
+    };
 
     bot.botReply('userName', 'question', function(resp){
         t.true(resp.indexOf('Sorry! I may have goofed up') > -1);
@@ -21,8 +21,8 @@ test.cb('Can handle errors.', t => {
 test.cb('Buffers replies which don\'t need a service.', t => {
     var bot = new SillyChatBot();
     bot.bot = {
-        reply: function () { return 'no services required' }
-    }
+        reply: function () { return 'no services required'; }
+    };
 
     bot.botReply('userName', 'question', function(resp){
         t.true(resp.indexOf('no services required') > -1);
@@ -39,8 +39,8 @@ test.cb('Can use a service if needed.', t => {
         }
     }];
     bot.bot = {
-        reply: function () { return 'serviceName###data' }
-    }
+        reply: function () { return 'serviceName###data'; }
+    };
 
     bot.botReply('userName', 'question', function(resp){
         t.true(resp.indexOf('bot reply') > -1);
@@ -51,8 +51,8 @@ test.cb('Can use a service if needed.', t => {
 test.cb('Consedes if a service is not registered.', t => {
     var bot = new SillyChatBot();
     bot.bot = {
-        reply: function () { return 'serviceName###data' }
-    }
+        reply: function () { return 'serviceName###data'; }
+    };
 
     bot.botReply('userName', 'question', function(resp){
         t.true(resp.indexOf('I don\'t know how to do this yet :(') > -1);

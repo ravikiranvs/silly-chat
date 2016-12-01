@@ -15,50 +15,50 @@ app.use(gzipStatic('public'));
 let users = {};
 
 io.on('connection', function (socket) {
-  users[socket.id.replace('/#', '')] = 'Unknown';
+    users[socket.id.replace('/#', '')] = 'Unknown';
 
-  io.emit('users', users);
-
-  socket.on('disconnect', function () {
-    users[socket.id.replace('/#', '')] = undefined;
     io.emit('users', users);
-  });
 
-  // incoming chat message
-  socket.on('chat message', function (msg) {
-    io.emit('chat message', msg);
-    var chatMsg = JSON.parse(msg);
-    chatBot.botReply(users[chatMsg.userId], chatMsg.message, function (reply) {
-      var botMsg = {
-        username: 'Bot',
-        message: reply,
-        time: chatMsg.time
-      };
-      io.emit('chat message', JSON.stringify(botMsg));
+    socket.on('disconnect', function () {
+        users[socket.id.replace('/#', '')] = undefined;
+        io.emit('users', users);
     });
-  });
 
-  // incoming key press
-  socket.on('chat isTyping', function (typing) {
-    io.emit('chat isTyping', typing);
-  });
+    // incoming chat message
+    socket.on('chat message', function (msg) {
+        io.emit('chat message', msg);
+        var chatMsg = JSON.parse(msg);
+        chatBot.botReply(users[chatMsg.userId], chatMsg.message, function (reply) {
+            var botMsg = {
+                username: 'Bot',
+                message: reply,
+                time: chatMsg.time
+            };
+            io.emit('chat message', JSON.stringify(botMsg));
+        });
+    });
 
-  // incoming user name change
-  socket.on('users', function (name) {
-    users[socket.id.replace('/#', '')] = name;
-    io.emit('users', users);
-  });
+    // incoming key press
+    socket.on('chat isTyping', function (typing) {
+        io.emit('chat isTyping', typing);
+    });
+
+    // incoming user name change
+    socket.on('users', function (name) {
+        users[socket.id.replace('/#', '')] = name;
+        io.emit('users', users);
+    });
 });
 
 var port = process.env.PORT || 5000;
 
 httpServer.listen(port, function () {
-  // eslint-disable-next-line no-console
-  console.log(`listening on *:${port}`);
+    // eslint-disable-next-line no-console
+    console.log(`listening on *:${port}`);
 });
 
 export default {
-  closeServer: function () {
-    httpServer.close();
-  }
+    closeServer: function () {
+        httpServer.close();
+    }
 };
