@@ -10,7 +10,7 @@ class LinkMiddleware {
             }
             if (urls.length == 1) {
                 callback('I found a URL! Let me create a link for it.');
-                const liArray = urls.map((url) => `<li><a href="${url} target="_blank">${url}</a></li>`);
+                const liArray = urls.map((url) => `<li><a href="${url}" target="_blank">${url}</a></li>`);
                 callback('<ul>' + liArray.join('') + '</ul>');
             }
         }
