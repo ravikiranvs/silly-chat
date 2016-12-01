@@ -26,7 +26,7 @@ class SlidingTimeKeeper {
 
 class Header extends React.Component {
     constructor(props, context) {
-        super(props);
+        super(props, context);
 
         this.slidingTimeKeeper = new SlidingTimeKeeper(this.onIsTypingOver.bind(this));
 
