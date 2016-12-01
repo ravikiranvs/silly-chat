@@ -12,7 +12,7 @@ class SillyChatBot {
     bot.loadFile('server/bot.rive',
       (batch_num) => {
         // eslint-disable-next-line no-console
-        console.log(`Bot loaded! Batch No: ${batch_num}`);
+        // console.log(`Bot loaded! Batch No: ${batch_num}`);
         bot.sortReplies();
       },
       (error, batch_num) => {
