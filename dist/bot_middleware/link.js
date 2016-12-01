@@ -29,7 +29,7 @@ var LinkMiddleware = function () {
                 if (urls.length == 1) {
                     callback('I found a URL! Let me create a link for it.');
                     var _liArray = urls.map(function (url) {
-                        return '<li><a href="' + url + ' target="_blank">' + url + '</a></li>';
+                        return '<li><a href="' + url + '" target="_blank">' + url + '</a></li>';
                     });
                     callback('<ul>' + _liArray.join('') + '</ul>');
                 }
