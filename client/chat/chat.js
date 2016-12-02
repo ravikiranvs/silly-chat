@@ -31,7 +31,7 @@ class Chat extends React.Component {
     }
 
     componentDidUpdate() {
-        if (this.shouldScrollBottom)
+        if (this.shouldScrollBottom && this.messageList)
             this.messageList.scrollTop = this.messageList.scrollHeight;
     }
 
