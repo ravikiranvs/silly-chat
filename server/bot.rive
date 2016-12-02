@@ -11,7 +11,7 @@
 - I'm Sorry :(
 
 // GOOGLE
-+ {weight=100}_ [(hello|hey|hi)] [bot] [(can you|can u|could you|could u)] (google|search for) *
++ {weight=100}_ [(hello|hey|hi)] [bot] [(can you|can u|could you|could u)] (google for|google|search for) *
 - search###<star5>
 
 // WEATHER
@@ -21,11 +21,17 @@
 + {weight=100}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] in _ [*] [(right now|now)]
 - weather###current###<star4>
 
++ {weight=50}_ [(hello|hey|hi)] [bot] [(what|how) (does|is)] [the] weather forcast [(like|look like)] [outside]
+- weather###forcast###Bangalore
+
 + {weight=50}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] [outside] [for] today
 - weather###forcast###Bangalore
 
 + {weight=100}_ [(hello|hey|hi)] [bot] [(what is|how is)] [the] weather [like] in _ [*] [for] today
 - weather###forcast###<star4>
+
++ {weight=50}_ [(hello|hey|hi)] [bot] [(what|how) (does|is)] [the] weather forcast [(like|look like)] (in|for) _
+- weather###forcast###<star7>
 
 // MOVIES
 + {weight=50}_ [(hello|hey|hi)] [bot] [(show me|what are|find)] [(the|some)] (new|latest) movies
