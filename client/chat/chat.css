@@ -4,8 +4,11 @@
   width: 100%;
   float: right;
   margin-bottom: 40px;
-  position:absolute;
+  position: absolute;
+  max-height: 100%;
+  overflow-y: scroll;
   bottom: 10px;
+  padding: 100px 0px 0px 0px;
 }
       
 .new-message-form {

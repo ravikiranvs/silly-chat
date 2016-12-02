@@ -21,6 +21,20 @@ class Chat extends React.Component {
         context.windowVisibilityBroadcaster.subscribe(this.onWindowVisible.bind(this));
     }
 
+    componentWillUpdate() {
+        if (this.messageList) {
+            this.shouldScrollBottom = this.messageList.scrollTop + this.messageList.offsetHeight === this.messageList.scrollHeight;
+        }
+        else {
+            this.shouldScrollBottom = false;
+        }
+    }
+
+    componentDidUpdate() {
+        if (this.shouldScrollBottom)
+            this.messageList.scrollTop = this.messageList.scrollHeight;
+    }
+
     onWindowVisible() {
         document.title = 'silly-chat';
     }
@@ -76,7 +90,7 @@ class Chat extends React.Component {
                 <Settings isVisible={this.state.settingsVisible} close={this.closeSettings} />
                 <Header openSettings={this.showSettings} />
 
-                <ul className="messages">
+                <ul className="messages" ref={(messageList) => { this.messageList = messageList; } }>
                     {this.state.messages.map((message, index) => {
                         const messageClass = message.username == this.context.config.getName() ? 'bubble me' : 'bubble you';
                         return (
