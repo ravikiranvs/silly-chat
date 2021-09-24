@@ -27,7 +27,7 @@
     "connect-gzip-static": "^1.0.0",
     "express": "^4.13.3",
     "fs": "^0.0.2",
-    "nodemailer": "^2.4.2",
+    "nodemailer": "^6.6.5",
     "react": "^15.3.1",
     "react-dom": "^15.3.1",
     "react-router": "^2.7.0",
